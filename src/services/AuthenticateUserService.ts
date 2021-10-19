@@ -43,7 +43,6 @@ class AuthenticateUserService {
         },
       },
     );
-    console.log(dataUser);
 
     const { avatar_url, id, login, name } = dataUser;
 
