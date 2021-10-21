@@ -1,3 +1,4 @@
+import { io } from 'src/app';
 import { prismaClient } from '../prisma';
 
 interface IResquest {
@@ -16,6 +17,19 @@ class CreateMessageService {
         user: true,
       },
     });
+
+    const infosWebSocket = {
+      text: message.text,
+      user_id: message.user_id,
+      created_at: message.created_at,
+      user: {
+        name: message.user.name,
+        avatar_url: message.user.avatar_url,
+      },
+    };
+
+    io.emit('new_messgae', infosWebSocket);
+
     return message;
   }
 }
